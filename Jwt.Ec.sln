@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jwt.Ec", "Jwt.Ec\Jwt.Ec.csproj", "{ACBA36DF-2B82-4C88-9A18-618B39882971}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jwt.Ec.Test", "Jwt.Ec.Test\Jwt.Ec.Test.csproj", "{0EE3EE17-7ADA-48B7-A4E7-2FAC889C05D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACBA36DF-2B82-4C88-9A18-618B39882971}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACBA36DF-2B82-4C88-9A18-618B39882971}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACBA36DF-2B82-4C88-9A18-618B39882971}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACBA36DF-2B82-4C88-9A18-618B39882971}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EE3EE17-7ADA-48B7-A4E7-2FAC889C05D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EE3EE17-7ADA-48B7-A4E7-2FAC889C05D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EE3EE17-7ADA-48B7-A4E7-2FAC889C05D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EE3EE17-7ADA-48B7-A4E7-2FAC889C05D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

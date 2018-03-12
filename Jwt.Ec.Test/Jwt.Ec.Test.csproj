@@ -13,6 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Jwt.Extensions\Jwt.Extensions.csproj" />
+    <Compile Remove="EmptyClass.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Jwt.Ec\Jwt.Ec.csproj" />
   </ItemGroup>
 </Project>
