@@ -4,7 +4,7 @@ using Org.BouncyCastle.Crypto.Parameters;
 
 namespace Jwt.Ec
 {
-    public class EcSecurityKey : SecurityKey
+    public class EcSecurityKey : AsymmetricSecurityKey
     {
         internal readonly ECPrivateKeyParameters PrivateKeyParameters;
         internal readonly ECPublicKeyParameters PublicKeyParameters;
@@ -19,12 +19,11 @@ namespace Jwt.Ec
             PublicKeyParameters = publicKey;
         }
 
-        public override int KeySize
-        {
-            get
-            {
-                return PrivateKeyParameters.D.BitCount;
-            }
-        }
+        public override int KeySize => PrivateKeyParameters.D.BitCount;
+
+        [Obsolete("HasPrivateKey method is deprecated, please use FoundPrivateKey instead.")]
+        public override bool HasPrivateKey => PrivateKeyParameters != null;
+
+        public override PrivateKeyStatus PrivateKeyStatus => PrivateKeyParameters != null ? PrivateKeyStatus.Exists : PrivateKeyStatus.DoesNotExist;
     }
 }

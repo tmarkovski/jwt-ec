@@ -10,6 +10,7 @@ using Org.BouncyCastle.Security;
 using Xunit;
 using Jwt.Ec;
 using System.Linq;
+using Org.BouncyCastle.Crypto.Digests;
 
 namespace Jwt.Ec.Test
 {
@@ -33,7 +34,10 @@ namespace Jwt.Ec.Test
             var securityKey = new EcSecurityKey(privateKey);
 
             var signingCredentials = new SigningCredentials(securityKey, algorithm);
-            signingCredentials.CryptoProviderFactory = new EcCryptoProviderFactory(domainParams, new[] { algorithm });
+            signingCredentials.CryptoProviderFactory = new EcCryptoProviderFactory(domainParams, 
+                                                                                   new[] { algorithm }, 
+                                                                                   deterministic: true, 
+                                                                                   digest: new Sha256Digest());
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var jwtToken = tokenHandler.CreateJwtSecurityToken(
@@ -57,7 +61,10 @@ namespace Jwt.Ec.Test
             var privateKey = GeneratePrivateKey(domainParams);
 
             var signingCredentials = new SigningCredentials(new EcSecurityKey(privateKey), algorithm);
-            signingCredentials.CryptoProviderFactory = new EcCryptoProviderFactory(domainParams, new[] { algorithm });
+            signingCredentials.CryptoProviderFactory = new EcCryptoProviderFactory(domainParams, 
+                                                                                   new[] { algorithm },
+                                                                                   deterministic: true,
+                                                                                   digest: new Sha256Digest());
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var jwtToken = tokenHandler.CreateJwtSecurityToken(
@@ -80,7 +87,10 @@ namespace Jwt.Ec.Test
                 ValidIssuer = "me",
                 ValidAudience = "you",
                 IssuerSigningKey = publicKey,
-                CryptoProviderFactory = new EcCryptoProviderFactory(domainParams, new[] { algorithm })
+                CryptoProviderFactory = new EcCryptoProviderFactory(domainParams, 
+                                                                    new[] { algorithm },
+                                                                    deterministic: true,
+                                                                    digest: new Sha256Digest())
             };
 
             var claims = tokenHandler.ValidateToken(token, settings, out var securityToken);

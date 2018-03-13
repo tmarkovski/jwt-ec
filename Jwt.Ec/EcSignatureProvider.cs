@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using Microsoft.IdentityModel.Tokens;
 using Org.BouncyCastle.Asn1.X9;
+using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Crypto.Signers;
@@ -13,10 +14,14 @@ namespace Jwt.Ec
     public class EcSignatureProvider : SignatureProvider
     {
         readonly ECDomainParameters DomainParams;
+        readonly bool Deterministic;
+        readonly IDigest Digest;
 
-        public EcSignatureProvider(SecurityKey key, string algorithm, ECDomainParameters domainParameters)
+        public EcSignatureProvider(SecurityKey key, string algorithm, ECDomainParameters domainParameters, bool deterministic = false, IDigest digest = null)
             : base(key, algorithm)
         {
+            Digest = digest;
+            Deterministic = deterministic;
             DomainParams = domainParameters;
         }
 
@@ -25,7 +30,9 @@ namespace Jwt.Ec
             var key = Key as EcSecurityKey;
             if (key == null || key.PrivateKeyParameters == null) throw new ArgumentException("Private Key must be of type EcSecurityKey and be initialized");
 
-            var signer = new ECDsaSigner(new HMacDsaKCalculator(new Sha256Digest()));
+            var signer = Deterministic
+                ? new ECDsaSigner(new HMacDsaKCalculator(Digest))
+                : new ECDsaSigner();
             signer.Init(true, key.PrivateKeyParameters);
             var signature = signer.GenerateSignature(input);
 
@@ -49,7 +56,9 @@ namespace Jwt.Ec
             var R = new BigInteger(1, signature.Take(32).ToArray());
             var S = new BigInteger(1, signature.Skip(32).ToArray());
 
-            var signer = new ECDsaSigner(new HMacDsaKCalculator(new Sha256Digest()));
+            var signer = Deterministic
+                ? new ECDsaSigner(new HMacDsaKCalculator(Digest))
+                : new ECDsaSigner();
             signer.Init(false, key.PublicKeyParameters);
             var result = signer.VerifySignature(input, R, S);
 

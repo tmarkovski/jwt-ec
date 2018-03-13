@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Jwt.Ec</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <authors>Tomislav Markovski</authors>
     <owners>Tomislav Markovski</owners>
     <licenseUrl>https://github.com/tmarkovski/jwt-ec/blob/master/LICENSE</licenseUrl>
