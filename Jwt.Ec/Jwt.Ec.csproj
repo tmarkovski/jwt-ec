@@ -1,7 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard1.4;netstandard2.0;net45;net46;net461</TargetFrameworks>
+    <Authors>Tomislav Markovski</Authors>
+    <Version>1.0.2</Version>
+    <Company />
+    <Product />
+    <Description>JWT support for signing EC keys using any curve</Description>
+    <PackageReleaseNotes>Added multiplatform targets for netstandard 1.4, 2.0, net45, net46, net461</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
